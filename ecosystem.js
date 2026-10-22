@@ -859,12 +859,30 @@ function initPaletteSwitcher() {
 
   applyPalette(initialPalette);
 
+  const comparatorWidget = document.getElementById("paletteComparator");
+  const comparatorToggle = document.getElementById("comparatorToggleBtn");
+  if (comparatorWidget && comparatorToggle) {
+    comparatorToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      comparatorWidget.classList.toggle("expanded");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!comparatorWidget.contains(e.target)) {
+        comparatorWidget.classList.remove("expanded");
+      }
+    });
+  }
+
   const paletteBtns = document.querySelectorAll("[data-palette-target]");
   paletteBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-palette-target");
       applyPalette(target);
       localStorage.setItem("enjoy_palette", target);
+      if (window.innerWidth <= 768 && comparatorWidget) {
+        comparatorWidget.classList.remove("expanded");
+      }
     });
   });
 }

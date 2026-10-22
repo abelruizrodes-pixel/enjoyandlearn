@@ -97,9 +97,10 @@
   <!-- MENÚ MÓVIL TIENDA -->
   <div class="mobile-drawer" id="mobileDrawer">
     <ul class="mobile-nav-links">
-      <li><a href="enjoy-and-learn.html">💃 Clases de Baile (Yomiuri &amp; Ludivine)</a></li>
       <li><a href="#catalogo">🛍️ Categorías de la Tienda</a></li>
-      <li><a href="https://wa.me/33749088022" target="_blank" rel="noopener noreferrer" style="color: #25D366;">💬 Contactar por WhatsApp</a></li>
+      <li><a href="enjoy-and-learn.html" class="mobile-drawer-bridge dance-bridge">💃 Clases de Baile (Yomiuri &amp; Ludivine)</a></li>
+      <li><a href="salud-y-bienestar.html" class="mobile-drawer-bridge wellness-bridge">🌿 Salud &amp; Bienestar (Ludivine)</a></li>
+      <li><a href="https://wa.me/33749088022" target="_blank" rel="noopener noreferrer" class="mobile-drawer-whatsapp">💬 WhatsApp Oficial (+33 7 49 08 80 22)</a></li>
     </ul>
     <button class="btn-primary" id="mobileOpenCartBtn" style="display: none;">
       Ver mi Carrito (0)
@@ -356,8 +357,11 @@
        WIDGET FLOTANTE COMPARADOR DE PALETAS EN VIVO
        ========================================================================== -->
   <aside class="palette-comparator-widget" id="paletteComparator" aria-label="Comparar Paletas de Color">
+    <button class="comparator-toggle-btn" id="comparatorToggleBtn" aria-label="Alternar paleta de color" title="Cambiar paleta de diseño">
+      <span>🎨</span>
+    </button>
     <div class="comparator-pill">
-      <span class="comparator-title">🎨 Paleta:</span>
+      <span class="comparator-title">Paleta de Color:</span>
       <button class="palette-btn active" data-palette-target="urbano" title="Azul Medianoche (#0B132B) + Fucsia Neón (#FF007F)">
         <span class="palette-dot" style="background: linear-gradient(135deg, #0B132B 50%, #FF007F 50%);"></span>
         <span>⚡ 3. Urbano</span>

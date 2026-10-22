@@ -84,12 +84,14 @@
   <!-- MENÚ MÓVIL -->
   <div class="mobile-drawer" id="mobileDrawer">
     <ul class="mobile-nav-links">
-      <li><a href="#instructores" data-i18n="nav_instructors">Instructores</a></li>
-      <li><a href="#clases" data-i18n="nav_classes">Clases &amp; Estilos</a></li>
-      <li><a href="#eventos" data-i18n="nav_events">Eventos</a></li>
-      <li><a href="tienda.html" style="color: var(--accent-secondary);" data-i18n="nav_shop">Tienda Oficial 🛍️</a></li>
+      <li><a href="#instructores" data-i18n="nav_instructors">🕺 Instructores (Él &amp; Ella)</a></li>
+      <li><a href="#clases" data-i18n="nav_classes">💃 Clases &amp; Estilos</a></li>
+      <li><a href="#eventos" data-i18n="nav_events">🎉 Próximos Eventos &amp; Galería</a></li>
+      <li><a href="tienda.html" class="mobile-drawer-bridge shop-bridge" data-i18n="nav_shop">🛍️ Tienda Oficial de Baile</a></li>
+      <li><a href="salud-y-bienestar.html" class="mobile-drawer-bridge wellness-bridge" data-i18n="nav_salud">🌿 Salud &amp; Bienestar (Ludivine)</a></li>
+      <li><a href="https://wa.me/33749088022" target="_blank" rel="noopener noreferrer" class="mobile-drawer-whatsapp">💬 WhatsApp (+33 7 49 08 80 22)</a></li>
     </ul>
-    <button class="btn-primary" data-open-modal="booking" style="width: 100%;" data-i18n="nav_booking">
+    <button class="btn-primary" data-open-modal="booking" style="width: 100%; min-height: 48px;" data-i18n="nav_booking">
       Reserva tu Clase
     </button>
   </div>
@@ -715,8 +717,11 @@
        WIDGET FLOTANTE COMPARADOR DE PALETAS EN VIVO
        ========================================================================== -->
   <aside class="palette-comparator-widget" id="paletteComparator" aria-label="Comparar Paletas de Color">
+    <button class="comparator-toggle-btn" id="comparatorToggleBtn" aria-label="Alternar paleta de color" title="Cambiar paleta de diseño">
+      <span>🎨</span>
+    </button>
     <div class="comparator-pill">
-      <span class="comparator-title">🎨 Paleta:</span>
+      <span class="comparator-title">Paleta de Color:</span>
       <button class="palette-btn active" data-palette-target="urbano" title="Azul Medianoche (#0B132B) + Fucsia Neón (#FF007F)">
         <span class="palette-dot" style="background: linear-gradient(135deg, #0B132B 50%, #FF007F 50%);"></span>
         <span>⚡ 3. Urbano</span>
