@@ -308,8 +308,104 @@ function initBookingModal() {
   const successMsg = document.getElementById("formSuccessMsg");
   const instructorSelect = document.getElementById("bookInstructor");
   const serviceSelect = document.getElementById("bookService");
+  const dateInput = document.getElementById("bookDate");
+  const dateSelect = document.getElementById("bookDateSelect");
+  const dateHelpText = document.getElementById("dateHelpText");
+  const dateLabel = document.getElementById("bookDateLabel");
 
-  function openModal(preselectInstructor, preselectService) {
+  const EVENT_CONFIG = {
+    "evento-luxembourg-latin-festival": {
+      date: "2026-10-23",
+      label: "23 – 25 Octubre 2026 (Festival Oficial)",
+      instructor: "he",
+      name: "Luxembourg Latin Dance Festival"
+    },
+    "evento-fiesta-cubana-casino": {
+      date: "2026-11-21",
+      label: "Sábado, 21 Noviembre 2026 · 20:00",
+      instructor: "he",
+      name: "Fiesta Cubana & Taller de Casino"
+    },
+    "evento-workshop-lady-styling": {
+      date: "2026-11-28",
+      label: "Sábado, 28 Noviembre 2026 · 16:30",
+      instructor: "she",
+      name: "Workshop Intensivo de Salsa Fusion & Lady Styling"
+    },
+    "evento-danse-vibes-bailoterapia": {
+      date: "2026-12-05",
+      label: "Sábado, 05 Diciembre 2026 · 11:00",
+      instructor: "she",
+      name: "Jornada 'Danse Vibes': Bailoterapia"
+    },
+    "evento-taller-bachata-sensual": {
+      date: "2026-12-12",
+      label: "Sábado, 12 Diciembre 2026 · 19:30",
+      instructor: "he",
+      name: "Taller Intensivo de Bachata Sensual & Noche Social"
+    }
+  };
+
+  function syncDateMode(preferredDate, preferredDateLabel) {
+    if (!serviceSelect) return;
+    const currentService = serviceSelect.value;
+    const isEvent = currentService.startsWith("evento-") || (currentService in EVENT_CONFIG);
+
+    if (isEvent) {
+      const evt = EVENT_CONFIG[currentService];
+      // Modo Evento: Mostrar selector de fechas específicas
+      if (dateInput) {
+        dateInput.style.display = "none";
+        dateInput.removeAttribute("required");
+        dateInput.disabled = true;
+      }
+      if (dateSelect) {
+        dateSelect.style.display = "block";
+        dateSelect.setAttribute("required", "");
+        dateSelect.disabled = false;
+        if (preferredDate) {
+          dateSelect.value = preferredDate;
+        } else if (evt && evt.date) {
+          dateSelect.value = evt.date;
+        }
+      }
+      if (dateHelpText) {
+        dateHelpText.style.display = "block";
+        const label = preferredDateLabel || (evt ? evt.label : "");
+        dateHelpText.textContent = label ? `🔒 Fecha confirmada: ${label}` : "🔒 Fecha específica para este evento.";
+      }
+      if (dateLabel) {
+        dateLabel.textContent = "Fecha del evento (confirmada)";
+      }
+      if (evt && evt.instructor && instructorSelect) {
+        instructorSelect.value = evt.instructor;
+      }
+    } else {
+      // Modo Clase Individual: Calendario regular
+      if (dateInput) {
+        dateInput.style.display = "block";
+        dateInput.setAttribute("required", "");
+        dateInput.disabled = false;
+      }
+      if (dateSelect) {
+        dateSelect.style.display = "none";
+        dateSelect.removeAttribute("required");
+        dateSelect.disabled = true;
+      }
+      if (dateHelpText) {
+        dateHelpText.style.display = "none";
+      }
+      if (dateLabel) {
+        dateLabel.textContent = "Fecha preferida";
+      }
+    }
+  }
+
+  if (serviceSelect) {
+    serviceSelect.addEventListener("change", () => syncDateMode());
+  }
+
+  function openModal(preselectInstructor, preselectService, preselectDate, preselectDateLabel) {
     if (backdrop) {
       if (preselectInstructor && instructorSelect) {
         instructorSelect.value = preselectInstructor;
@@ -317,6 +413,8 @@ function initBookingModal() {
       if (preselectService && serviceSelect) {
         serviceSelect.value = preselectService;
       }
+
+      syncDateMode(preselectDate, preselectDateLabel);
 
       // Asegurar estado inicial limpio
       if (modalHeader) modalHeader.style.display = "block";
@@ -326,7 +424,7 @@ function initBookingModal() {
 
       backdrop.classList.add("active");
       document.body.style.overflow = "hidden";
-      const firstInput = backdrop.querySelector("input, select");
+      const firstInput = backdrop.querySelector("input:not([style*='display: none']), select:not([style*='display: none'])");
       if (firstInput) setTimeout(() => firstInput.focus(), 100);
     }
   }
@@ -339,6 +437,7 @@ function initBookingModal() {
         if (form) {
           form.reset();
           form.style.display = "block";
+          syncDateMode();
         }
         if (modalHeader) modalHeader.style.display = "block";
         if (receiptView) receiptView.style.display = "none";
@@ -351,7 +450,9 @@ function initBookingModal() {
     e.preventDefault();
     const preInstructor = btn.getAttribute("data-preselect-instructor");
     const preService = btn.getAttribute("data-preselect-service");
-    openModal(preInstructor, preService);
+    const preDate = btn.getAttribute("data-preselect-date");
+    const preDateLabel = btn.getAttribute("data-preselect-date-label");
+    openModal(preInstructor, preService, preDate, preDateLabel);
   }));
 
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
@@ -374,25 +475,34 @@ function initBookingModal() {
 
       const nameInput = document.getElementById("bookName");
       const emailInput = document.getElementById("bookEmail");
-      const dateInput = document.getElementById("bookDate");
 
       const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "Estimado/a alumno/a";
       const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : "No especificado";
-      const rawDate = dateInput ? dateInput.value : "";
 
-      let formattedDate = rawDate;
-      if (rawDate) {
-        try {
-          const d = new Date(rawDate + "T00:00:00");
-          formattedDate = d.toLocaleDateString("es-ES", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          });
-          formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-        } catch (err) {
-          formattedDate = rawDate;
+      const currentService = serviceSelect ? serviceSelect.value : "";
+      const isEvent = currentService.startsWith("evento-") || (currentService in EVENT_CONFIG);
+      let rawDate = "";
+      let formattedDate = "";
+
+      if (isEvent && dateSelect && !dateSelect.disabled) {
+        rawDate = dateSelect.value;
+        const selectedOpt = dateSelect.options[dateSelect.selectedIndex];
+        formattedDate = (selectedOpt && selectedOpt.getAttribute("data-label")) || (selectedOpt ? selectedOpt.text : "");
+      } else if (dateInput && !dateInput.disabled) {
+        rawDate = dateInput.value;
+        if (rawDate) {
+          try {
+            const d = new Date(rawDate + "T00:00:00");
+            formattedDate = d.toLocaleDateString("es-ES", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            });
+            formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+          } catch (err) {
+            formattedDate = rawDate;
+          }
         }
       }
 
@@ -449,7 +559,7 @@ function initBookingModal() {
               `👤 *Nom :* ${name}\n` +
               (instructorName ? `🕺 *Professeur :* ${instructorName}\n` : "") +
               `🎯 *Discipline :* ${serviceName}\n` +
-              `📅 *Date souhaitée :* ${rawDate || formattedDate}\n` +
+              `📅 *Date souhaitée :* ${formattedDate || rawDate}\n` +
               `📧 *E-mail :* ${email}\n\n` +
               `Je reste à l'écoute pendant que vous vérifiez le planning pour me confirmer ma place. Merci beaucoup !`;
           } else if (currentLang === 'en') {
@@ -458,7 +568,7 @@ function initBookingModal() {
               `👤 *Name:* ${name}\n` +
               (instructorName ? `🕺 *Instructor:* ${instructorName}\n` : "") +
               `🎯 *Class / Style:* ${serviceName}\n` +
-              `📅 *Requested Date:* ${rawDate || formattedDate}\n` +
+              `📅 *Requested Date:* ${formattedDate || rawDate}\n` +
               `📧 *Email:* ${email}\n\n` +
               `I'll stay tuned while you check the schedule to confirm my spot. Thank you so much!`;
           } else {
@@ -467,7 +577,7 @@ function initBookingModal() {
               `👤 *Nombre:* ${name}\n` +
               (instructorName ? `🕺 *Instructor:* ${instructorName}\n` : "") +
               `🎯 *Modalidad:* ${serviceName}\n` +
-              `📅 *Fecha solicitada:* ${rawDate || formattedDate}\n` +
+              `📅 *Fecha solicitada:* ${formattedDate || rawDate}\n` +
               `📧 *Email:* ${email}\n\n` +
               `Estoy atento/a a cuando revises la agenda para confirmar mi plaza. ¡Muchas gracias!`;
           }
@@ -553,7 +663,7 @@ Web: https://abelruizrodes-pixel.github.io/enjoyandlearn/`;
           "Correo Electrónico": email,
           "Instructor": instructorName || "Por asignar",
           "Modalidad / Clase": serviceName,
-          "Fecha Solicitada": rawDate || formattedDate,
+          "Fecha Solicitada": formattedDate || rawDate,
           "Comentarios / Notas": notes || "Sin comentarios adicionales"
         };
 

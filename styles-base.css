@@ -801,6 +801,16 @@ img, video {
   box-shadow: 0 0 0 3px var(--accent-secondary-glow);
 }
 
+.form-help-text {
+  font-size: 0.8rem;
+  color: var(--accent-secondary);
+  margin-top: 0.35rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .form-textarea {
   resize: vertical;
   min-height: 90px;
