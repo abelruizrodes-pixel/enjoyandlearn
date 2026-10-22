@@ -137,6 +137,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Transiciones fluidas entre páginas
   initBridgeTransitions();
+
+  // Comparador interactivo de paletas (Urbano, Caribe, Asfalto)
+  initPaletteSwitcher();
 });
 
 // ==========================================================================
@@ -569,3 +572,44 @@ function initBridgeTransitions() {
     });
   });
 }
+
+// ==========================================================================
+// 10. COMPARADOR DE PALETAS DE COLOR (Urbano, Caribe, Asfalto)
+// ==========================================================================
+function initPaletteSwitcher() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramPalette = urlParams.get("palette");
+  const storedPalette = localStorage.getItem("enjoy_palette");
+  
+  // Prioridad: 1. Parámetro URL (?palette=...), 2. Atributo en HTML, 3. LocalStorage, 4. 'urbano'
+  const htmlPalette = document.documentElement.getAttribute("data-palette");
+  const initialPalette = paramPalette || htmlPalette || storedPalette || "urbano";
+
+  applyPalette(initialPalette);
+
+  const paletteBtns = document.querySelectorAll("[data-palette-target]");
+  paletteBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-palette-target");
+      applyPalette(target);
+      localStorage.setItem("enjoy_palette", target);
+    });
+  });
+}
+
+function applyPalette(paletteName) {
+  if (!paletteName) return;
+  document.documentElement.setAttribute("data-palette", paletteName);
+  document.body.className = document.body.className.replace(/palette-\w+/g, "").trim() + ` palette-${paletteName}`;
+
+  // Actualizar botones activos
+  const paletteBtns = document.querySelectorAll("[data-palette-target]");
+  paletteBtns.forEach(btn => {
+    if (btn.getAttribute("data-palette-target") === paletteName) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
+}
+

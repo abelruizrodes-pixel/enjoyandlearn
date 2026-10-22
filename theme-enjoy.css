@@ -1,50 +1,122 @@
 /* ==========================================================================
-   PALETA OFICIAL "CARIBE" (Enjoy and Learn)
-   Fondo principal: Blanco Arena (#F4F1EA)
-   Acción primaria (Botones): Terracota Vibrante (#E65100)
-   Acentos: Verde Botánico (#2E7D32)
-   Texto: Gris Antracita (#2C3E50)
+   SISTEMA DE PALETAS OFICIALES - ENJOY & LEARN
+   1. Asfalto & Pasión: #121212 | #C62828 | #D4AF37 | #F5F5F5
+   2. Caribe:           #F4F1EA | #E65100 | #2E7D32 | #2C3E50
+   3. Urbano (Activo):  #0B132B | #FF007F | #00E5FF | #E0E1DD
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   PALETA 3: "URBANO" (Activa por defecto)
+   Fondo principal: Azul Medianoche (#0B132B)
+   Acción primaria (Botones): Fucsia Neón (#FF007F)
+   Acentos: Cian Vibrante (#00E5FF)
+   Texto: Gris Plata (#E0E1DD)
+   -------------------------------------------------------------------------- */
 :root,
-:root[data-theme="enjoy"],
-body.theme-enjoy {
-  /* Fondo principal: Blanco Arena (#F4F1EA) - Un lienzo luminoso y cálido */
-  --bg-primary: #F4F1EA;
-  --bg-surface: #FFFFFF;
-  --bg-surface-elevated: #FFFFFF;
-  --bg-glass: rgba(244, 241, 234, 0.92);
+:root[data-palette="urbano"],
+body.palette-urbano {
+  /* Fondo principal: Azul Medianoche (#0B132B) */
+  --bg-primary: #0B132B;
+  --bg-surface: #131E3D;
+  --bg-surface-elevated: #1C2A52;
+  --bg-glass: rgba(11, 19, 43, 0.92);
   
-  /* Texto: Gris Antracita (#2C3E50) - Contraste alto y moderno sin dureza */
-  --text-primary: #2C3E50;
-  --text-muted: #566573;
-  --text-dim: #7F8C8D;
+  /* Texto: Gris Plata (#E0E1DD) */
+  --text-primary: #E0E1DD;
+  --text-muted: #9BA3B8;
+  --text-dim: #627194;
   
-  /* Acción primaria (Botones): Terracota Vibrante (#E65100) - Calor afroantillano */
-  --accent-cta: #E65100;
-  --accent-cta-hover: #BF360C;
+  /* Acción primaria (Botones): Fucsia Neón (#FF007F) */
+  --accent-cta: #FF007F;
+  --accent-cta-hover: #D6006B;
   
-  /* Acentos: Verde Botánico (#2E7D32) - Frescura que estructura visualmente */
-  --accent-secondary: #2E7D32;
-  --accent-secondary-glow: rgba(46, 125, 50, 0.20);
+  /* Acentos: Cian Vibrante (#00E5FF) */
+  --accent-secondary: #00E5FF;
+  --accent-secondary-glow: rgba(0, 229, 255, 0.25);
   
-  --border-subtle: rgba(44, 62, 80, 0.12);
-  --border-focus: rgba(46, 125, 50, 0.50);
+  --border-subtle: rgba(224, 225, 221, 0.14);
+  --border-focus: rgba(0, 229, 255, 0.55);
   
-  /* Tipografía */
   --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --heading-weight: 800;
   --heading-transform: uppercase;
   --heading-letter-spacing: -0.02em;
   
-  /* Sombras y atmósfera luminosa cálida */
+  --shadow-elevation: 0 10px 30px -10px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 25px rgba(255, 0, 127, 0.45);
+  --bridge-gradient: linear-gradient(135deg, #FF007F 0%, #00E5FF 100%);
+  --texture-overlay: radial-gradient(circle at 80% 20%, rgba(255, 0, 127, 0.14) 0%, transparent 60%),
+                     radial-gradient(circle at 10% 80%, rgba(0, 229, 255, 0.10) 0%, transparent 50%);
+  
+  --card-radius: 12px;
+  --pill-radius: 9999px;
+}
+
+/* --------------------------------------------------------------------------
+   PALETA 2: "CARIBE"
+   Fondo principal: Blanco Arena (#F4F1EA)
+   Acción primaria (Botones): Terracota Vibrante (#E65100)
+   Acentos: Verde Botánico (#2E7D32)
+   Texto: Gris Antracita (#2C3E50)
+   -------------------------------------------------------------------------- */
+:root[data-palette="caribe"],
+body.palette-caribe {
+  --bg-primary: #F4F1EA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-glass: rgba(244, 241, 234, 0.92);
+  
+  --text-primary: #2C3E50;
+  --text-muted: #566573;
+  --text-dim: #7F8C8D;
+  
+  --accent-cta: #E65100;
+  --accent-cta-hover: #BF360C;
+  
+  --accent-secondary: #2E7D32;
+  --accent-secondary-glow: rgba(46, 125, 50, 0.20);
+  
+  --border-subtle: rgba(44, 62, 80, 0.12);
+  --border-focus: rgba(46, 125, 50, 0.50);
+  
   --shadow-elevation: 0 10px 30px -10px rgba(44, 62, 80, 0.10);
   --shadow-glow: 0 4px 20px rgba(230, 81, 0, 0.28);
   --bridge-gradient: linear-gradient(135deg, #E65100 0%, #2E7D32 100%);
   --texture-overlay: radial-gradient(circle at 85% 15%, rgba(230, 81, 0, 0.05) 0%, transparent 60%),
                      radial-gradient(circle at 15% 85%, rgba(46, 125, 50, 0.04) 0%, transparent 50%);
+}
+
+/* --------------------------------------------------------------------------
+   PALETA 1: "ASFALTO & PASIÓN"
+   Fondo principal: Negro Asfalto (#121212)
+   Acción primaria (Botones): Rojo Carmesí (#C62828)
+   Acentos: Oro Envejecido (#D4AF37)
+   Texto: Blanco Humo (#F5F5F5)
+   -------------------------------------------------------------------------- */
+:root[data-palette="asfalto"],
+body.palette-asfalto {
+  --bg-primary: #121212;
+  --bg-surface: #1a1a1a;
+  --bg-surface-elevated: #242424;
+  --bg-glass: rgba(18, 18, 18, 0.88);
   
-  --card-radius: 12px;
-  --pill-radius: 9999px;
+  --text-primary: #F5F5F5;
+  --text-muted: #B3B3B3;
+  --text-dim: #737373;
+  
+  --accent-cta: #C62828;
+  --accent-cta-hover: #D32F2F;
+  
+  --accent-secondary: #D4AF37;
+  --accent-secondary-glow: rgba(212, 175, 55, 0.25);
+  
+  --border-subtle: rgba(245, 245, 245, 0.12);
+  --border-focus: rgba(212, 175, 55, 0.50);
+  
+  --shadow-elevation: 0 10px 30px -10px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 25px rgba(198, 40, 40, 0.35);
+  --bridge-gradient: linear-gradient(135deg, #C62828 0%, #D4AF37 100%);
+  --texture-overlay: radial-gradient(circle at 80% 20%, rgba(198, 40, 40, 0.10) 0%, transparent 60%),
+                     radial-gradient(circle at 10% 80%, rgba(212, 175, 55, 0.06) 0%, transparent 50%);
 }

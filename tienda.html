@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" data-theme="enjoy">
+<html lang="es" data-palette="urbano">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="theme-enjoy.css">
   <link rel="stylesheet" href="styles-base.css">
 </head>
-<body class="theme-enjoy">
+<body class="palette-urbano">
 
   <!-- ==========================================================================
        HEADER STICKY CON CARRITO Y RETORNO A CLASES
@@ -298,6 +298,27 @@
       </div>
     </div>
   </footer>
+
+  <!-- ==========================================================================
+       WIDGET FLOTANTE COMPARADOR DE PALETAS EN VIVO
+       ========================================================================== -->
+  <aside class="palette-comparator-widget" id="paletteComparator" aria-label="Comparar Paletas de Color">
+    <div class="comparator-pill">
+      <span class="comparator-title">🎨 Paleta:</span>
+      <button class="palette-btn active" data-palette-target="urbano" title="Azul Medianoche (#0B132B) + Fucsia Neón (#FF007F)">
+        <span class="palette-dot" style="background: linear-gradient(135deg, #0B132B 50%, #FF007F 50%);"></span>
+        <span>⚡ 3. Urbano</span>
+      </button>
+      <button class="palette-btn" data-palette-target="caribe" title="Blanco Arena (#F4F1EA) + Terracota Vibrante (#E65100)">
+        <span class="palette-dot" style="background: linear-gradient(135deg, #F4F1EA 50%, #E65100 50%);"></span>
+        <span>🏖️ 2. Caribe</span>
+      </button>
+      <button class="palette-btn" data-palette-target="asfalto" title="Negro Asfalto (#121212) + Rojo Carmesí (#C62828)">
+        <span class="palette-dot" style="background: linear-gradient(135deg, #121212 50%, #C62828 50%);"></span>
+        <span>🖤 1. Asfalto</span>
+      </button>
+    </div>
+  </aside>
 
   <script src="ecosystem.js"></script>
 </body>
