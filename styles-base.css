@@ -1082,6 +1082,68 @@ img, video {
   margin-bottom: 2.5rem;
 }
 
+.footer-social-hub {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.footer-social-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.footer-social-item .social-icon-btn {
+  margin: 0 auto;
+}
+
+.footer-social-item:hover .social-icon-btn {
+  transform: translateY(-4px) scale(1.08);
+}
+
+.social-instructor-name {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.25s ease, letter-spacing 0.25s ease;
+  white-space: nowrap;
+}
+
+.footer-social-item:hover .social-instructor-name {
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+}
+
+.footer-social-item:hover .social-icon-btn.social-instagram ~ .social-instructor-name {
+  color: #fd5949;
+}
+
+.footer-social-item:hover .social-icon-btn.social-spotify ~ .social-instructor-name {
+  color: #1DB954;
+}
+
+.footer-social-item:hover .social-icon-btn.social-whatsapp ~ .social-instructor-name {
+  color: #25D366;
+}
+
+.footer-social-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--border-subtle);
+  margin: 0 0.25rem;
+  align-self: center;
+}
+
 .footer-socials {
   display: flex;
   align-items: center;
