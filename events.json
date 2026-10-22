@@ -1,5 +1,21 @@
 [
   {
+    "id": "ig_luxembourg_latin_festival",
+    "handle": "luxembourglatindancefestival",
+    "instructor": "Yomiuri Ruiz & Artistas Internacionales",
+    "instructor_avatar": "assets/logo-couple.png",
+    "title": "Luxembourg Latin Dance Festival (Edición Oficial)",
+    "date": "2026-10-23",
+    "date_display": "23 – 25 Octubre 2026",
+    "category": "salsa",
+    "badge": "GRAN FESTIVAL",
+    "location": "Confiserie Namur (2 Rue de Bitburg, Hamm, Luxemburgo)",
+    "description": "El festival latino de referencia en Luxemburgo: talleres intensivos de Salsa Cubana y Bachata, shows de baile con artistas internacionales y veladas sociales inolvidables.",
+    "image": "assets/event-luxembourg-latin-festival.jpg",
+    "instagram_url": "https://www.instagram.com/luxembourglatindancefestival/",
+    "booking_service": "salsa-yomiuri"
+  },
+  {
     "id": "ig_fiesta_cubana_yomiuri",
     "handle": "yomiuri_ruiz",
     "instructor": "Yomiuri Ruiz & DJ Ladysalsa",
