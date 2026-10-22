@@ -229,17 +229,39 @@ function initMobileDrawer() {
       const isOpen = mobileDrawer.classList.toggle("open");
       mobileToggle.innerHTML = isOpen ? "✕" : "☰";
       mobileToggle.setAttribute("aria-expanded", isOpen);
+      // Bloquear scroll de fondo en móviles (iOS y Android)
+      document.body.style.overflow = isOpen ? "hidden" : "";
     });
 
     mobileDrawer.querySelectorAll("a, button").forEach(elem => {
       elem.addEventListener("click", () => {
-        // Si no es el botón del carrito móvil que abre el drawer del carrito
         if (elem.id !== "mobileOpenCartBtn") {
           mobileDrawer.classList.remove("open");
           mobileToggle.innerHTML = "☰";
           mobileToggle.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
         }
       });
+    });
+
+    // Cerrar automáticamente si la pantalla rota o supera 900px
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && mobileDrawer.classList.contains("open")) {
+        mobileDrawer.classList.remove("open");
+        mobileToggle.innerHTML = "☰";
+        mobileToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      }
+    });
+
+    // Cerrar con Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mobileDrawer.classList.contains("open")) {
+        mobileDrawer.classList.remove("open");
+        mobileToggle.innerHTML = "☰";
+        mobileToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      }
     });
   }
 }

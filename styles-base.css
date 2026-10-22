@@ -45,6 +45,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -56,9 +57,19 @@ body {
   background-attachment: fixed;
   overflow-x: hidden;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   transition: background-color 0.45s ease, color 0.45s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch optimization & tap target response */
+button, a, input, select, textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Tipografía de títulos */
@@ -98,6 +109,7 @@ img, video {
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-subtle);
   transition: all 0.35s ease;
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .site-header.scrolled {
@@ -777,7 +789,9 @@ img, video {
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 16px; /* Previene auto-zoom forzado en Safari iOS */
+  -webkit-appearance: none;
+  appearance: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -1267,19 +1281,26 @@ img, video {
 }
 
 /* ==========================================================================
-   7. RESPONSIVE Y MENÚ MÓVIL (MOBILE-FIRST)
+   7. RESPONSIVE Y MENÚ MÓVIL (MOBILE-FIRST PARA IOS & ANDROID)
    ========================================================================== */
 .mobile-drawer {
   position: fixed;
-  inset: 76px 0 0 0;
+  top: calc(76px + env(safe-area-inset-top, 0px));
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100dvh - 76px - env(safe-area-inset-top, 0px));
   background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   z-index: 99;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem 1.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
   gap: 1.5rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
   transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1298,6 +1319,8 @@ img, video {
 .mobile-nav-links a {
   font-size: 1.35rem;
   font-weight: 700;
+  display: inline-block;
+  padding: 0.25rem 0;
 }
 
 @media (max-width: 900px) {
@@ -1305,11 +1328,20 @@ img, video {
     display: none;
   }
   .mobile-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
   }
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
   .services-grid {
     grid-template-columns: 1fr;
@@ -1325,6 +1357,195 @@ img, video {
   .footer-top, .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .footer-social-hub {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ==========================================================================
+   OPTIMIZACIONES MÓVILES AVANZADAS (SMARTPHONES IOS & ANDROID)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .container {
+    width: min(1200px, 100% - 1.75rem);
+  }
+
+  .header-container {
+    height: 68px;
+    gap: 0.5rem;
+  }
+
+  .mobile-drawer {
+    top: calc(68px + env(safe-area-inset-top, 0px));
+    height: calc(100dvh - 68px - env(safe-area-inset-top, 0px));
+  }
+
+  .brand-logo {
+    gap: 0.5rem;
+  }
+
+  .brand-logo-img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .brand-logo span {
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-actions-right {
+    gap: 0.5rem;
+  }
+
+  .lang-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+    min-height: 42px;
+  }
+
+  .bridge-button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+    min-height: 42px;
+  }
+
+  .bridge-button span:last-child {
+    display: none; /* Ahorra espacio visual en móvil */
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 2.75rem) !important;
+    line-height: 1.15;
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .hero-actions a,
+  .hero-actions button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Filtros con desplazamiento horizontal suave táctil estilo App nativa */
+  .shop-filters,
+  .styles-filter,
+  .instructor-filter-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 0.55rem;
+    padding: 0.4rem 0.2rem 0.75rem;
+    margin: 1.5rem 0 2rem;
+    scrollbar-width: none;
+  }
+
+  .shop-filters::-webkit-scrollbar,
+  .styles-filter::-webkit-scrollbar,
+  .instructor-filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn,
+  .instructor-tab-btn {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    min-height: 44px;
+    padding: 0.55rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  /* Modal de reserva táctil con área segura en iOS & Android */
+  .booking-modal-backdrop {
+    padding: 0.75rem;
+  }
+
+  .booking-modal {
+    padding: 1.75rem 1.25rem calc(1.75rem + env(safe-area-inset-bottom, 0px));
+    max-height: 92dvh;
+    border-radius: 16px;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .modal-close-btn {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.45rem;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    font-size: 16px !important;
+    padding: 0.8rem 0.95rem;
+    min-height: 48px;
+  }
+
+  .form-textarea {
+    min-height: 90px;
+  }
+
+  .form-submit-btn {
+    min-height: 50px;
+    font-size: 1rem;
+  }
+
+  .receipt-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .receipt-whatsapp-btn {
+    min-height: 48px;
+    font-size: 0.95rem;
+  }
+
+  /* Footer en móvil */
+  .footer-social-hub {
+    gap: 1.1rem;
+  }
+
+  .footer-bottom {
+    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-logo span {
+    font-size: 0.95rem;
+  }
+
+  .bridge-button {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .header-container {
+    gap: 0.35rem;
   }
 }
 
@@ -2369,16 +2590,19 @@ img, video {
 
 @media (max-width: 768px) {
   .palette-comparator-widget {
-    bottom: 0.75rem;
-    padding: 0.3rem 0.4rem;
+    bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    padding: 0.35rem 0.5rem;
     max-width: 95vw;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
   }
   .comparator-title {
     display: none;
   }
   .palette-btn {
-    padding: 0.35rem 0.65rem;
-    font-size: 0.75rem;
+    padding: 0.4rem 0.7rem;
+    font-size: 0.78rem;
+    min-height: 38px;
   }
 }
