@@ -397,6 +397,33 @@ function initBookingModal() {
         if (modalHeader) modalHeader.style.display = "none";
         form.style.display = "none";
         receiptView.style.display = "flex";
+
+        // Enviar notificación por correo a enjoyandlearn20@gmail.com con acuse automático al cliente
+        const notesInput = document.getElementById("bookNotes");
+        const notes = notesInput ? notesInput.value.trim() : "";
+        const emailPayload = {
+          _subject: `Nueva Reserva [${randomRef}] - ${name} (${serviceName})`,
+          _template: "table",
+          _autoresponse: `¡Hola ${name}! 💃\n\nHemos recibido correctamente tu solicitud de reserva en Enjoy & Learn (Ref: #${randomRef}).\n\nDetalles registrados:\n• Modalidad: ${serviceName}\n• Instructor: ${instructorName || 'A coordinar'}\n• Fecha solicitada: ${formattedDate || rawDate || 'Por convenir'}\n\nNuestro equipo está revisando la disponibilidad y PRONTO TE CONFIRMAREMOS TU RESERVA y plaza definitiva por este medio o vía WhatsApp.\n\n¡Muchas gracias y nos vemos bailando!\nEquipo Enjoy & Learn`,
+          "Código de Referencia": `#${randomRef}`,
+          "Nombre Completo": name,
+          "Correo Electrónico": email,
+          "Instructor": instructorName || "Por asignar",
+          "Modalidad / Clase": serviceName,
+          "Fecha Solicitada": rawDate || formattedDate,
+          "Comentarios / Notas": notes || "Sin comentarios adicionales"
+        };
+
+        fetch("https://formsubmit.co/ajax/enjoyandlearn20@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(emailPayload)
+        }).catch(err => {
+          console.warn("Envío de reserva a enjoyandlearn20@gmail.com:", err);
+        });
       } else if (successMsg) {
         successMsg.innerHTML = `<strong>¡Acuse de Recibo (#${randomRef})!</strong> Hemos recibido tu solicitud correctamente. Pronto te confirmaremos tu reserva.`;
         successMsg.style.display = "block";
