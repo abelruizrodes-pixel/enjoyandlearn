@@ -233,7 +233,7 @@
     <div class="booking-modal">
       <button class="modal-close-btn" id="modalCloseBtn" aria-label="Cerrar ventana">✕</button>
       
-      <div class="modal-header">
+      <div class="modal-header" id="bookingModalHeader">
         <h3 id="modalTitle" data-i18n="modal_title">Agenda tu Sesión</h3>
         <p data-i18n="modal_subtitle">Selecciona el servicio y fecha deseada. Responderemos en menos de 24 horas.</p>
       </div>
@@ -274,8 +274,65 @@
         </button>
       </form>
 
+      <!-- ACUSE DE RECIBO / CONFIRMACIÓN AUTOMÁTICA -->
+      <div class="booking-receipt" id="bookingReceipt" style="display: none;" role="region" aria-live="polite">
+        <div class="receipt-icon-wrapper">
+          <span class="receipt-check">✓</span>
+        </div>
+        <div class="receipt-status-pill">Acuse de Recibo Automático</div>
+        <h3 class="receipt-title" id="receiptHeading">¡Solicitud Recibida con Éxito!</h3>
+        
+        <div class="receipt-assurance-banner">
+          <span class="assurance-icon">🌿</span>
+          <div class="assurance-text">
+            <strong>Hemos registrado tu solicitud de sesión correctamente.</strong>
+            <p>Pronto te confirmaremos tu reserva y los detalles de acceso y preparación vía email o WhatsApp tras validar la agenda.</p>
+          </div>
+        </div>
+
+        <div class="receipt-details-box">
+          <div class="receipt-meta-row">
+            <span class="meta-label">Referencia</span>
+            <span class="meta-value ref-badge" id="receiptRef">-</span>
+          </div>
+          <div class="receipt-meta-row">
+            <span class="meta-label">Titular</span>
+            <span class="meta-value" id="receiptName">-</span>
+          </div>
+          <div class="receipt-meta-row">
+            <span class="meta-label">Email</span>
+            <span class="meta-value" id="receiptEmail">-</span>
+          </div>
+          <div class="receipt-meta-row" id="receiptInstructorRow" style="display: none;">
+            <span class="meta-label">Especialista</span>
+            <span class="meta-value" id="receiptInstructor">-</span>
+          </div>
+          <div class="receipt-meta-row">
+            <span class="meta-label">Servicio</span>
+            <span class="meta-value" id="receiptService">-</span>
+          </div>
+          <div class="receipt-meta-row">
+            <span class="meta-label">Fecha solicitada</span>
+            <span class="meta-value" id="receiptDate">-</span>
+          </div>
+        </div>
+
+        <div class="receipt-channel-note">
+          <p>📧 Hemos enviado una copia de este acuse de recibo a tu correo. Revisa tu bandeja de entrada o spam.</p>
+        </div>
+
+        <div class="receipt-actions">
+          <a href="#" target="_blank" class="receipt-btn-whatsapp" id="receiptWhatsAppLink">
+            <span>Contactar por WhatsApp</span> 💬
+          </a>
+          <button type="button" class="receipt-btn-secondary" id="receiptCloseBtn">
+            Aceptar y Volver
+          </button>
+        </div>
+      </div>
+
       <div class="form-success-msg" id="formSuccessMsg" data-i18n="modal_success">
-        ¡Gracias! Tu solicitud ha sido registrada. Te contactaremos pronto.
+        ¡Gracias! Tu solicitud ha sido registrada. Pronto te confirmaremos tu reserva.
       </div>
     </div>
   </div>

@@ -241,6 +241,8 @@ function initBookingModal() {
   const closeBtn = document.getElementById("modalCloseBtn");
   const openButtons = document.querySelectorAll("[data-open-modal='booking']");
   const form = document.getElementById("bookingForm");
+  const modalHeader = document.getElementById("bookingModalHeader");
+  const receiptView = document.getElementById("bookingReceipt");
   const successMsg = document.getElementById("formSuccessMsg");
   const instructorSelect = document.getElementById("bookInstructor");
   const serviceSelect = document.getElementById("bookService");
@@ -254,6 +256,12 @@ function initBookingModal() {
         serviceSelect.value = preselectService;
       }
 
+      // Asegurar estado inicial limpio
+      if (modalHeader) modalHeader.style.display = "block";
+      if (form) form.style.display = "block";
+      if (receiptView) receiptView.style.display = "none";
+      if (successMsg) successMsg.style.display = "none";
+
       backdrop.classList.add("active");
       document.body.style.overflow = "hidden";
       const firstInput = backdrop.querySelector("input, select");
@@ -265,8 +273,15 @@ function initBookingModal() {
     if (backdrop) {
       backdrop.classList.remove("active");
       document.body.style.overflow = "";
-      if (form) form.reset();
-      if (successMsg) successMsg.style.display = "none";
+      setTimeout(() => {
+        if (form) {
+          form.reset();
+          form.style.display = "block";
+        }
+        if (modalHeader) modalHeader.style.display = "block";
+        if (receiptView) receiptView.style.display = "none";
+        if (successMsg) successMsg.style.display = "none";
+      }, 300);
     }
   }
 
@@ -294,12 +309,99 @@ function initBookingModal() {
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      if (successMsg) {
-        successMsg.style.display = "block";
+
+      const nameInput = document.getElementById("bookName");
+      const emailInput = document.getElementById("bookEmail");
+      const dateInput = document.getElementById("bookDate");
+
+      const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : "Estimado/a alumno/a";
+      const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : "No especificado";
+      const rawDate = dateInput ? dateInput.value : "";
+
+      let formattedDate = rawDate;
+      if (rawDate) {
+        try {
+          const d = new Date(rawDate + "T00:00:00");
+          formattedDate = d.toLocaleDateString("es-ES", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          });
+          formattedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+        } catch (err) {
+          formattedDate = rawDate;
+        }
       }
-      setTimeout(() => {
-        closeModal();
-      }, 2500);
+
+      let instructorName = "";
+      if (instructorSelect && instructorSelect.selectedIndex >= 0) {
+        const fullOption = instructorSelect.options[instructorSelect.selectedIndex].text;
+        instructorName = fullOption.split("·")[0].trim();
+      }
+
+      let serviceName = "Sesión / Clase Individual";
+      if (serviceSelect && serviceSelect.selectedIndex >= 0) {
+        serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+      }
+
+      const randomRef = "ENJ-" + Math.floor(1000 + Math.random() * 9000);
+
+      if (receiptView) {
+        const refEl = document.getElementById("receiptRef");
+        const nameEl = document.getElementById("receiptName");
+        const emailEl = document.getElementById("receiptEmail");
+        const instructorEl = document.getElementById("receiptInstructor");
+        const instructorRow = document.getElementById("receiptInstructorRow");
+        const serviceEl = document.getElementById("receiptService");
+        const dateEl = document.getElementById("receiptDate");
+        const headingEl = document.getElementById("receiptHeading");
+        const waLink = document.getElementById("receiptWhatsAppLink");
+        const receiptCloseBtn = document.getElementById("receiptCloseBtn");
+
+        if (refEl) refEl.textContent = "#" + randomRef;
+        if (nameEl) nameEl.textContent = name;
+        if (emailEl) emailEl.textContent = email;
+        if (serviceEl) serviceEl.textContent = serviceName;
+        if (dateEl) dateEl.textContent = formattedDate || "Por convenir";
+        
+        const firstName = name.split(" ")[0];
+        if (headingEl) headingEl.textContent = `¡Solicitud Recibida, ${firstName}!`;
+
+        if (instructorRow && instructorEl) {
+          if (instructorName) {
+            instructorEl.textContent = instructorName;
+            instructorRow.style.display = "flex";
+          } else {
+            instructorRow.style.display = "none";
+          }
+        }
+
+        if (waLink) {
+          const waMessage = `¡Hola Enjoy & Learn! 👋 Acabo de enviar mi solicitud de reserva en la web:\n\n` +
+            `📋 *Referencia:* #${randomRef}\n` +
+            `👤 *Nombre:* ${name}\n` +
+            (instructorName ? `🕺 *Instructor:* ${instructorName}\n` : "") +
+            `🎯 *Modalidad:* ${serviceName}\n` +
+            `📅 *Fecha solicitada:* ${rawDate || formattedDate}\n` +
+            `📧 *Email:* ${email}\n\n` +
+            `He recibido el acuse de recibo y quedo a la espera de su confirmación. ¡Muchas gracias!`;
+          waLink.href = `https://wa.me/352661000000?text=${encodeURIComponent(waMessage)}`;
+        }
+
+        if (receiptCloseBtn) {
+          receiptCloseBtn.onclick = closeModal;
+        }
+
+        // Transición visual elegante: Ocultar form, mostrar acuse de recibo
+        if (modalHeader) modalHeader.style.display = "none";
+        form.style.display = "none";
+        receiptView.style.display = "flex";
+      } else if (successMsg) {
+        successMsg.innerHTML = `<strong>¡Acuse de Recibo (#${randomRef})!</strong> Hemos recibido tu solicitud correctamente. Pronto te confirmaremos tu reserva.`;
+        successMsg.style.display = "block";
+        setTimeout(() => closeModal(), 4000);
+      }
     });
   }
 }

@@ -825,6 +825,212 @@ img, video {
 }
 
 /* ==========================================================================
+   5.1 ACUSE DE RECIBO (CONFIRMACIÓN AUTOMÁTICA DE RESERVA)
+   ========================================================================== */
+.booking-receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem 0;
+  animation: receiptFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes receiptFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.receipt-icon-wrapper {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.12);
+  border: 2px solid var(--accent-secondary);
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.85rem;
+  box-shadow: 0 0 20px var(--accent-secondary-glow);
+}
+
+.receipt-check {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--accent-secondary);
+  line-height: 1;
+}
+
+.receipt-status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.receipt-title {
+  font-size: 1.45rem;
+  font-weight: var(--heading-weight, 700);
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.receipt-assurance-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  text-align: left;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid var(--accent-secondary);
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
+.assurance-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.assurance-text strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.assurance-text p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.receipt-details-box {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-align: left;
+}
+
+.receipt-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.86rem;
+  border-bottom: 1px dashed var(--border-subtle);
+  padding-bottom: 0.45rem;
+}
+
+.receipt-meta-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.meta-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.meta-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+
+.meta-value.ref-badge {
+  color: var(--accent-secondary);
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: rgba(0, 229, 255, 0.1);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.receipt-channel-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+
+.receipt-actions {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.receipt-btn-whatsapp {
+  flex: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #25D366;
+  color: #FFF;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.receipt-btn-whatsapp:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  color: #FFF;
+}
+
+.receipt-btn-secondary {
+  flex: 1;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.receipt-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 520px) {
+  .receipt-actions {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================================
    6. FOOTER MINIMALISTA
    ========================================================================== */
 .site-footer {
