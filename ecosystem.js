@@ -449,7 +449,7 @@ function initBookingModal() {
               `📧 *Email:* ${email}\n\n` +
               `Estoy atento/a a cuando revises la agenda para confirmar mi plaza. ¡Muchas gracias!`;
           }
-          waLink.href = `https://wa.me/352661000000?text=${encodeURIComponent(waMessage)}`;
+          waLink.href = `https://wa.me/33749088022?text=${encodeURIComponent(waMessage)}`;
         }
 
         updateReceiptHeader();
@@ -519,7 +519,7 @@ Je consulte actuellement mon planning afin de vous réserver le créneau idéal,
 Nos vemos muy pronto bailando / See you on the dance floor soon / À très vite sur la piste ! 🎶
 
 Enjoy & Learn · Luxembourg 🇱🇺
-WhatsApp directo: +352 661 000 000
+WhatsApp directo: +33 7 49 08 80 22
 Web: https://abelruizrodes-pixel.github.io/enjoyandlearn/`;
 
         const emailPayload = {
@@ -794,7 +794,7 @@ function initShop() {
 
       const message = `¡Hola Enjoy & Learn! 👋 Quisiera realizar el siguiente pedido desde la web:\n\n${itemsText}\n\n*Total a pagar: ${totalPrice.toFixed(2)} € (TVA incl.)*\n\n¿Cómo podemos coordinar el pago y la entrega/activación?`;
 
-      const whatsappUrl = `https://wa.me/352661000000?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/33749088022?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, "_blank");
     });
   }
