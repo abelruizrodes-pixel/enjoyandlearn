@@ -381,11 +381,13 @@ function initBookingModal() {
         instructorSelect.value = evt.instructor;
       }
     } else {
-      // Modo Clase Individual: Calendario regular
+      // Modo Clase Individual o Reserva General: Calendario regular abierto a cualquier fecha
       if (dateInput) {
         dateInput.style.display = "block";
         dateInput.setAttribute("required", "");
         dateInput.disabled = false;
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.min = today;
       }
       if (dateSelect) {
         dateSelect.style.display = "none";
@@ -396,13 +398,40 @@ function initBookingModal() {
         dateHelpText.style.display = "none";
       }
       if (dateLabel) {
-        dateLabel.textContent = "Fecha preferida";
+        dateLabel.textContent = "Fecha preferida (elige cualquier fecha)";
       }
     }
   }
 
   if (serviceSelect) {
-    serviceSelect.addEventListener("change", () => syncDateMode());
+    serviceSelect.addEventListener("change", () => {
+      const currentService = serviceSelect.value || "";
+      if (currentService.includes("yomiuri") && instructorSelect) {
+        instructorSelect.value = "he";
+      } else if (currentService.includes("ludivine") && instructorSelect) {
+        instructorSelect.value = "she";
+      }
+      syncDateMode();
+    });
+  }
+
+  if (instructorSelect) {
+    instructorSelect.addEventListener("change", () => {
+      const inst = instructorSelect.value;
+      const currentService = serviceSelect ? serviceSelect.value : "";
+      const isEvent = currentService.startsWith("evento-") || (currentService in EVENT_CONFIG);
+      // Al cambiar de instructor, si había un evento o un servicio del otro instructor, cambiar a la clase individual correspondiente
+      if (inst === "she") {
+        if (isEvent || !currentService.includes("ludivine")) {
+          if (serviceSelect) serviceSelect.value = "salsa-ladystyle-ludivine";
+        }
+      } else if (inst === "he") {
+        if (isEvent || !currentService.includes("yomiuri")) {
+          if (serviceSelect) serviceSelect.value = "salsa-yomiuri";
+        }
+      }
+      syncDateMode();
+    });
   }
 
   function openModal(preselectInstructor, preselectService, preselectDate, preselectDateLabel) {
@@ -412,6 +441,13 @@ function initBookingModal() {
       }
       if (preselectService && serviceSelect) {
         serviceSelect.value = preselectService;
+      } else if (!preselectService && serviceSelect) {
+        // Reserva general o desde perfil de instructor: asegurar clase individual para permitir fecha libre
+        if (preselectInstructor === "she" || (instructorSelect && instructorSelect.value === "she")) {
+          serviceSelect.value = "salsa-ladystyle-ludivine";
+        } else {
+          serviceSelect.value = "salsa-yomiuri";
+        }
       }
 
       syncDateMode(preselectDate, preselectDateLabel);
