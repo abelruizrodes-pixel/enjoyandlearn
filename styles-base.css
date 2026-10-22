@@ -880,6 +880,37 @@ img, video {
   margin-bottom: 0.5rem;
 }
 
+.receipt-lang-switcher {
+  display: flex;
+  gap: 0.45rem;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+.receipt-lang-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  border-radius: 999px;
+  padding: 0.2rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.receipt-lang-pill:hover {
+  border-color: var(--accent-secondary);
+  color: var(--text-primary);
+}
+
+.receipt-lang-pill.active {
+  background: var(--accent-secondary);
+  color: #000;
+  border-color: var(--accent-secondary);
+  font-weight: 700;
+}
+
 .receipt-title {
   font-size: 1.45rem;
   font-weight: var(--heading-weight, 700);

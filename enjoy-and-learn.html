@@ -573,54 +573,62 @@
         <div class="receipt-icon-wrapper">
           <span class="receipt-check">✓</span>
         </div>
-        <div class="receipt-status-pill">Acuse de Recibo Automático</div>
-        <h3 class="receipt-title" id="receiptHeading">¡Solicitud Recibida con Éxito!</h3>
+        
+        <!-- SELECTOR DE IDIOMA DEL ACUSE (3 IDIOMAS) -->
+        <div class="receipt-lang-switcher" aria-label="Cambiar idioma del acuse">
+          <button type="button" class="receipt-lang-pill active" data-receipt-lang="es">🇪🇸 ES</button>
+          <button type="button" class="receipt-lang-pill" data-receipt-lang="en">🇬🇧 EN</button>
+          <button type="button" class="receipt-lang-pill" data-receipt-lang="fr">🇫🇷 FR</button>
+        </div>
+
+        <div class="receipt-status-pill" data-i18n="receipt_status">Acuse de Recibo</div>
+        <h3 class="receipt-title" id="receiptHeading">¡Hola! He recibido tu solicitud</h3>
         
         <div class="receipt-assurance-banner">
           <span class="assurance-icon">⏳</span>
           <div class="assurance-text">
-            <strong>Hemos registrado tu solicitud de reserva correctamente.</strong>
-            <p>Pronto te confirmaremos tu reserva y la asignación definitiva de tu plaza vía email o WhatsApp tras validar la agenda.</p>
+            <strong data-i18n="receipt_banner_title">Estoy revisando la agenda en este momento...</strong>
+            <p data-i18n="receipt_banner_text">Estoy comprobando los horarios disponibles para darte el mejor hueco. En breve te confirmo tu reserva por correo o WhatsApp para que podamos bailar pronto juntos.</p>
           </div>
         </div>
 
         <div class="receipt-details-box">
           <div class="receipt-meta-row">
-            <span class="meta-label">Referencia</span>
+            <span class="meta-label" data-i18n="receipt_ref_label">Referencia</span>
             <span class="meta-value ref-badge" id="receiptRef">-</span>
           </div>
           <div class="receipt-meta-row">
-            <span class="meta-label">Titular</span>
+            <span class="meta-label" data-i18n="receipt_name_label">Titular</span>
             <span class="meta-value" id="receiptName">-</span>
           </div>
           <div class="receipt-meta-row">
-            <span class="meta-label">Email</span>
+            <span class="meta-label" data-i18n="receipt_email_label">Email</span>
             <span class="meta-value" id="receiptEmail">-</span>
           </div>
           <div class="receipt-meta-row" id="receiptInstructorRow">
-            <span class="meta-label">Instructor</span>
+            <span class="meta-label" data-i18n="receipt_instructor_label">Instructor</span>
             <span class="meta-value" id="receiptInstructor">-</span>
           </div>
           <div class="receipt-meta-row">
-            <span class="meta-label">Modalidad</span>
+            <span class="meta-label" data-i18n="receipt_service_label">Modalidad</span>
             <span class="meta-value" id="receiptService">-</span>
           </div>
           <div class="receipt-meta-row">
-            <span class="meta-label">Fecha solicitada</span>
+            <span class="meta-label" data-i18n="receipt_date_label">Fecha solicitada</span>
             <span class="meta-value" id="receiptDate">-</span>
           </div>
         </div>
 
         <div class="receipt-channel-note">
-          <p>📧 Hemos enviado una copia de este acuse de recibo a tu correo. Revisa tu bandeja de entrada o spam.</p>
+          <p data-i18n="receipt_copy_notice">📧 Te he enviado una copia de este acuse a tu correo. Revisa también tu carpeta de spam.</p>
         </div>
 
         <div class="receipt-actions">
           <a href="#" target="_blank" class="receipt-btn-whatsapp" id="receiptWhatsAppLink">
-            <span>Abrir en WhatsApp</span> 💬
+            <span data-i18n="receipt_whatsapp_btn">Escríbeme por WhatsApp</span> 💬
           </a>
-          <button type="button" class="receipt-btn-secondary" id="receiptCloseBtn">
-            Aceptar y Volver
+          <button type="button" class="receipt-btn-secondary" id="receiptCloseBtn" data-i18n="receipt_close_btn">
+            Cerrar y Volver a la Web
           </button>
         </div>
       </div>

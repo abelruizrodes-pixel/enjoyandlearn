@@ -29,6 +29,18 @@ const TRANSLATIONS = {
     modal_subtitle: "Selecciona tu instructor, modalidad y fecha. Te responderemos en menos de 24h.",
     modal_submit: "Confirmar Solicitud de Reserva",
     modal_success: "¡Gracias! Tu solicitud ha sido registrada. Te contactaremos muy pronto para confirmar.",
+    receipt_status: "Acuse de Recibo",
+    receipt_banner_title: "Estoy revisando la agenda en este momento...",
+    receipt_banner_text: "Estoy comprobando los horarios disponibles para darte el mejor hueco. En breve te confirmo tu reserva por correo o WhatsApp para que podamos bailar pronto juntos.",
+    receipt_ref_label: "Referencia",
+    receipt_name_label: "Titular",
+    receipt_email_label: "Email",
+    receipt_instructor_label: "Instructor",
+    receipt_service_label: "Modalidad",
+    receipt_date_label: "Fecha solicitada",
+    receipt_copy_notice: "📧 Te he enviado una copia de este acuse a tu correo. Revisa también tu carpeta de spam.",
+    receipt_whatsapp_btn: "Escríbeme por WhatsApp",
+    receipt_close_btn: "Cerrar y Volver a la Web",
     footer_rights: "Todos los derechos reservados.",
     footer_privacy: "Política de Privacidad",
     footer_legal: "Aviso Legal"
@@ -54,6 +66,18 @@ const TRANSLATIONS = {
     modal_subtitle: "Select your preferred instructor, style and date. We will reply within 24 hours.",
     modal_submit: "Confirm Booking Request",
     modal_success: "Thank you! Your request has been recorded. We will contact you shortly to confirm.",
+    receipt_status: "Booking Receipt",
+    receipt_banner_title: "I'm checking the schedule right now...",
+    receipt_banner_text: "I'm currently checking available time slots to find the best match for you. I'll confirm your booking shortly via email or WhatsApp so we can dance together soon.",
+    receipt_ref_label: "Reference",
+    receipt_name_label: "Name",
+    receipt_email_label: "Email",
+    receipt_instructor_label: "Instructor",
+    receipt_service_label: "Class / Style",
+    receipt_date_label: "Requested Date",
+    receipt_copy_notice: "📧 I've sent a copy of this receipt to your email. Please check your spam folder too.",
+    receipt_whatsapp_btn: "Message me on WhatsApp",
+    receipt_close_btn: "Close & Return to Site",
     footer_rights: "All rights reserved.",
     footer_privacy: "Privacy Policy",
     footer_legal: "Legal Notice"
@@ -79,6 +103,18 @@ const TRANSLATIONS = {
     modal_subtitle: "Sélectionnez votre professeur, discipline et date. Réponse sous 24h.",
     modal_submit: "Confirmer la Réservation",
     modal_success: "Merci ! Votre demande a été enregistrée. Nous vous contacterons très vite pour confirmer.",
+    receipt_status: "Accusé de Réception",
+    receipt_banner_title: "Je consulte actuellement mon planning...",
+    receipt_banner_text: "Je vérifie les créneaux disponibles pour vous réserver le meilleur horaire. Je vous confirme très vite votre réservation par e-mail ou WhatsApp pour qu'on se retrouve bientôt sur la piste.",
+    receipt_ref_label: "Référence",
+    receipt_name_label: "Nom",
+    receipt_email_label: "E-mail",
+    receipt_instructor_label: "Professeur",
+    receipt_service_label: "Discipline",
+    receipt_date_label: "Date souhaitée",
+    receipt_copy_notice: "📧 Une copie de cet accusé vous a été envoyée par e-mail. Vérifiez aussi vos spams.",
+    receipt_whatsapp_btn: "M'écrire sur WhatsApp",
+    receipt_close_btn: "Fermer et Retourner au Site",
     footer_rights: "Tous droits réservés.",
     footer_privacy: "Politique de Confidentialité",
     footer_legal: "Mentions Légales"
@@ -104,6 +140,10 @@ function applyLanguage(lang) {
 
   document.querySelectorAll(".lang-opt").forEach(btn => {
     btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
+
+  document.querySelectorAll(".receipt-lang-pill").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-receipt-lang") === lang);
   });
 }
 
@@ -366,7 +406,66 @@ function initBookingModal() {
         if (dateEl) dateEl.textContent = formattedDate || "Por convenir";
         
         const firstName = name.split(" ")[0];
-        if (headingEl) headingEl.textContent = `¡Solicitud Recibida, ${firstName}!`;
+        
+        function updateReceiptHeader() {
+          if (!headingEl) return;
+          if (currentLang === 'fr') {
+            headingEl.textContent = `Bonjour ${firstName} ! J'ai bien reçu votre demande`;
+          } else if (currentLang === 'en') {
+            headingEl.textContent = `Hi ${firstName}! I've received your request`;
+          } else {
+            headingEl.textContent = `¡Hola ${firstName}! He recibido tu solicitud`;
+          }
+        }
+
+        function updateWhatsAppLink() {
+          if (!waLink) return;
+          let waMessage = "";
+          if (currentLang === 'fr') {
+            waMessage = `Bonjour Enjoy & Learn ! 👋 Je viens d'envoyer ma demande de réservation sur le site :\n\n` +
+              `📋 *Référence :* #${randomRef}\n` +
+              `👤 *Nom :* ${name}\n` +
+              (instructorName ? `🕺 *Professeur :* ${instructorName}\n` : "") +
+              `🎯 *Discipline :* ${serviceName}\n` +
+              `📅 *Date souhaitée :* ${rawDate || formattedDate}\n` +
+              `📧 *E-mail :* ${email}\n\n` +
+              `Je reste à l'écoute pendant que vous vérifiez le planning pour me confirmer ma place. Merci beaucoup !`;
+          } else if (currentLang === 'en') {
+            waMessage = `Hi Enjoy & Learn! 👋 I just submitted my booking request on the website:\n\n` +
+              `📋 *Reference:* #${randomRef}\n` +
+              `👤 *Name:* ${name}\n` +
+              (instructorName ? `🕺 *Instructor:* ${instructorName}\n` : "") +
+              `🎯 *Class / Style:* ${serviceName}\n` +
+              `📅 *Requested Date:* ${rawDate || formattedDate}\n` +
+              `📧 *Email:* ${email}\n\n` +
+              `I'll stay tuned while you check the schedule to confirm my spot. Thank you so much!`;
+          } else {
+            waMessage = `¡Hola Enjoy & Learn! 👋 Acabo de enviar mi solicitud de reserva en la web:\n\n` +
+              `📋 *Referencia:* #${randomRef}\n` +
+              `👤 *Nombre:* ${name}\n` +
+              (instructorName ? `🕺 *Instructor:* ${instructorName}\n` : "") +
+              `🎯 *Modalidad:* ${serviceName}\n` +
+              `📅 *Fecha solicitada:* ${rawDate || formattedDate}\n` +
+              `📧 *Email:* ${email}\n\n` +
+              `Estoy atento/a a cuando revises la agenda para confirmar mi plaza. ¡Muchas gracias!`;
+          }
+          waLink.href = `https://wa.me/352661000000?text=${encodeURIComponent(waMessage)}`;
+        }
+
+        updateReceiptHeader();
+        updateWhatsAppLink();
+
+        // Conectar botones de cambio de idioma dentro del acuse de recibo
+        const receiptPills = document.querySelectorAll(".receipt-lang-pill");
+        receiptPills.forEach(pill => {
+          pill.onclick = (e) => {
+            e.preventDefault();
+            const targetLang = pill.getAttribute("data-receipt-lang");
+            applyLanguage(targetLang);
+            updateReceiptHeader();
+            updateWhatsAppLink();
+          };
+        });
 
         if (instructorRow && instructorEl) {
           if (instructorName) {
@@ -375,18 +474,6 @@ function initBookingModal() {
           } else {
             instructorRow.style.display = "none";
           }
-        }
-
-        if (waLink) {
-          const waMessage = `¡Hola Enjoy & Learn! 👋 Acabo de enviar mi solicitud de reserva en la web:\n\n` +
-            `📋 *Referencia:* #${randomRef}\n` +
-            `👤 *Nombre:* ${name}\n` +
-            (instructorName ? `🕺 *Instructor:* ${instructorName}\n` : "") +
-            `🎯 *Modalidad:* ${serviceName}\n` +
-            `📅 *Fecha solicitada:* ${rawDate || formattedDate}\n` +
-            `📧 *Email:* ${email}\n\n` +
-            `He recibido el acuse de recibo y quedo a la espera de su confirmación. ¡Muchas gracias!`;
-          waLink.href = `https://wa.me/352661000000?text=${encodeURIComponent(waMessage)}`;
         }
 
         if (receiptCloseBtn) {
@@ -401,10 +488,44 @@ function initBookingModal() {
         // Enviar notificación por correo a enjoyandlearn20@gmail.com con acuse automático al cliente
         const notesInput = document.getElementById("bookNotes");
         const notes = notesInput ? notesInput.value.trim() : "";
+
+        // Mensaje cálido, cercano y trilingüe para la respuesta automática por email
+        const autoresponseTrilingual = 
+`¡Hola ${firstName}! 💃 / Hi ${firstName}! / Bonjour ${firstName} !
+
+✨ [ESPAÑOL]
+¡Muchas gracias por escribirme! Ya tengo en mis manos tu solicitud de reserva (#${randomRef}).
+Estoy revisando la agenda en este momento para darte el mejor hueco y muy pronto te confirmaré tu reserva por aquí o por WhatsApp para que podamos bailar pronto juntos.
+
+✨ [ENGLISH]
+Thank you so much for reaching out! I've received your booking request (#${randomRef}).
+I'm checking the schedule right now to find the best time slot for you, and I'll confirm your reservation very shortly via email or WhatsApp so we can start dancing together soon!
+
+✨ [FRANÇAIS]
+Merci beaucoup pour votre message ! J'ai bien reçu votre demande de réservation (#${randomRef}).
+Je consulte actuellement mon planning afin de vous réserver le créneau idéal, et je vous confirme très vite votre réservation par e-mail ou WhatsApp pour qu'on se retrouve bientôt sur la piste !
+
+────────────────────────────────────────────
+📋 DATOS REGISTRADOS / SUMMARY / DÉTAILS:
+• Referencia / Reference / Référence: #${randomRef}
+• Titular / Name / Nom: ${name}
+• Email: ${email}
+• Instructor / Professeur: ${instructorName || 'A coordinar / TBD'}
+• Modalidad / Style / Discipline: ${serviceName}
+• Fecha / Date: ${formattedDate || rawDate || 'Flexible / A convenir'}
+• Notas / Notes: ${notes || 'Sin notas adicionales'}
+────────────────────────────────────────────
+
+Nos vemos muy pronto bailando / See you on the dance floor soon / À très vite sur la piste ! 🎶
+
+Enjoy & Learn · Luxembourg 🇱🇺
+WhatsApp directo: +352 661 000 000
+Web: https://abelruizrodes-pixel.github.io/enjoyandlearn/`;
+
         const emailPayload = {
           _subject: `Nueva Reserva [${randomRef}] - ${name} (${serviceName})`,
           _template: "table",
-          _autoresponse: `¡Hola ${name}! 💃\n\nHemos recibido correctamente tu solicitud de reserva en Enjoy & Learn (Ref: #${randomRef}).\n\nDetalles registrados:\n• Modalidad: ${serviceName}\n• Instructor: ${instructorName || 'A coordinar'}\n• Fecha solicitada: ${formattedDate || rawDate || 'Por convenir'}\n\nNuestro equipo está revisando la disponibilidad y PRONTO TE CONFIRMAREMOS TU RESERVA y plaza definitiva por este medio o vía WhatsApp.\n\n¡Muchas gracias y nos vemos bailando!\nEquipo Enjoy & Learn`,
+          _autoresponse: autoresponseTrilingual,
           "Código de Referencia": `#${randomRef}`,
           "Nombre Completo": name,
           "Correo Electrónico": email,
