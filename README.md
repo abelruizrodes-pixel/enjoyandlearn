@@ -50,16 +50,15 @@ Ecosistema web dual compuesto por dos sitios hermanos interconectados que compar
 ## 📁 Estructura del Proyecto
 
 ```
-proofenjoy/
+enjoyandlearn/
 ├── index.html                # Entrada predeterminada (Enjoy & Learn)
 ├── enjoy-and-learn.html      # Página A: Salsa, Eventos y Audiovisuales
 ├── salud-y-bienestar.html    # Página B: Mindfulness, Yoga y Nutrición
+├── tienda.html               # Tienda Oficial de Ropa y Bonos de Baile
 ├── styles-base.css           # Arquitectura común, layout, modales y animaciones
-├── theme-enjoy.css           # Variables cromáticas y estilos de Enjoy & Learn
+├── theme-enjoy.css           # Paleta oficial "Caribe" de Enjoy & Learn
 ├── theme-bienestar.css       # Variables cromáticas y estilos de Salud & Bienestar
-├── ecosystem.js              # Controlador multilingüe, parallax, modal y puente
-├── screenshot-enjoy.png      # Captura visual de Enjoy and Learn
-├── screenshot-bienestar.png  # Captura visual de Salud y Bienestar
+├── ecosystem.js              # Controlador multilingüe, carrito, modal y filtros
 └── README.md
 ```
 
@@ -67,10 +66,9 @@ proofenjoy/
 
 ## 🚀 Despliegue en GitHub Pages
 
-Para publicar este proyecto gratis con GitHub Pages:
+Para publicar este proyecto con GitHub Pages:
 
-1. Ve a tu repositorio en GitHub: `https://github.com/abelruizrodes-pixel/proofenjoy/settings/pages`.
-2. En **Build and deployment > Source**, selecciona **Deploy from a branch**.
-3. Elige la rama `main` y la carpeta `/ (root)`, luego haz clic en **Save**.
-4. En unos segundos tu web estará en vivo en:
-   **`https://abelruizrodes-pixel.github.io/proofenjoy/`**
+1. Ve a tu repositorio en GitHub: `https://github.com/abelruizrodes-pixel/enjoyandlearn/settings/pages`.
+2. En **Build and deployment > Source**, selecciona **GitHub Actions** (despliegue automatizado).
+3. Tu web estará en vivo en:
+   **`https://abelruizrodes-pixel.github.io/enjoyandlearn/`**
