@@ -612,7 +612,7 @@ function initEventsGallery() {
 function initShop() {
   // --- A. Filtros de catálogo en tienda.html ---
   const shopFilters = document.querySelectorAll("[data-shop-filter]");
-  const productCards = document.querySelectorAll(".product-card[data-shop-category]");
+  const productCards = document.querySelectorAll(".category-card[data-shop-category], .product-card[data-shop-category]");
 
   shopFilters.forEach(btn => {
     btn.addEventListener("click", () => {
