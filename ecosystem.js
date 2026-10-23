@@ -127,6 +127,19 @@ const TRANSLATIONS = {
     "optgroup_he": "Metodología Yomiuri Ruiz (Clases Individuales)",
     "optgroup_she": "Metodología Ludivine Gomez (Clases Individuales)",
     "optgroup_events": "🎉 Próximos Eventos & Talleres Especiales (Fechas Específicas)",
+    "opt_salsa_yomiuri": "Salsa Cubana & Casino (con Yomiuri Ruiz)",
+    "opt_rumba_yomiuri": "Rumba Tradicional Afrocubana (con Yomiuri Ruiz)",
+    "opt_bachata_yomiuri": "Bachata & Conducción Rítmica (con Yomiuri Ruiz)",
+    "opt_fitness_yomiuri": "Personal Training & Acondicionamiento (con Yomiuri Ruiz)",
+    "opt_ladystyle_ludivine": "Salsa Cubana & Lady Style (con Ludivine Gomez)",
+    "opt_bailoterapia_ludivine": "Bailoterapia · Salud & Bienestar (con Ludivine Gomez)",
+    "opt_bachata_ludivine": "Bachata Sensual & Fluidez Corporal (con Ludivine Gomez)",
+    "opt_estiramiento_ludivine": "Alineación Postural & Estiramiento (con Ludivine Gomez)",
+    "opt_event_luxembourg": "Luxembourg Latin Dance Festival (23 – 25 Oct 2026)",
+    "opt_event_fiesta": "Fiesta Cubana & Taller de Casino (Sáb 21 Nov 2026 · 20:00)",
+    "opt_event_ladystyle": "Workshop Salsa Fusion & Lady Styling (Sáb 28 Nov 2026 · 16:30)",
+    "opt_event_bailoterapia": "Jornada 'Danse Vibes': Bailoterapia (Sáb 05 Dic 2026 · 11:00)",
+    "opt_event_bachata": "Taller Bachata Sensual & Noche Social (Sáb 12 Dic 2026 · 19:30)",
     "label_date": "Fecha de la clase / evento",
     "label_date_free": "Fecha preferida (elige cualquier fecha)",
     "label_date_locked": "Fecha del evento (confirmada)",
@@ -326,6 +339,19 @@ const TRANSLATIONS = {
     "optgroup_he": "Methodology Yomiuri Ruiz (Individual Classes)",
     "optgroup_she": "Methodology Ludivine Gomez (Individual Classes)",
     "optgroup_events": "🎉 Upcoming Events & Workshops (Specific Dates)",
+    "opt_salsa_yomiuri": "Cuban Salsa & Casino (with Yomiuri Ruiz)",
+    "opt_rumba_yomiuri": "Traditional Afro-Cuban Rumba (with Yomiuri Ruiz)",
+    "opt_bachata_yomiuri": "Bachata & Rhythmic Partnerwork (with Yomiuri Ruiz)",
+    "opt_fitness_yomiuri": "Personal Training & Conditioning (with Yomiuri Ruiz)",
+    "opt_ladystyle_ludivine": "Cuban Salsa & Lady Style (with Ludivine Gomez)",
+    "opt_bailoterapia_ludivine": "Bailoterapia · Health & Wellness (with Ludivine Gomez)",
+    "opt_bachata_ludivine": "Sensual Bachata & Body Fluidity (with Ludivine Gomez)",
+    "opt_estiramiento_ludivine": "Postural Alignment & Stretching (with Ludivine Gomez)",
+    "opt_event_luxembourg": "Luxembourg Latin Dance Festival (23 – 25 Oct 2026)",
+    "opt_event_fiesta": "Cuban Party & Casino Workshop (Sat 21 Nov 2026 · 20:00)",
+    "opt_event_ladystyle": "Salsa Fusion & Lady Styling Workshop (Sat 28 Nov 2026 · 16:30)",
+    "opt_event_bailoterapia": "'Danse Vibes' Day: Bailoterapia (Sat 05 Dec 2026 · 11:00)",
+    "opt_event_bachata": "Sensual Bachata Workshop & Social (Sat 12 Dec 2026 · 19:30)",
     "label_date": "Class / event date",
     "label_date_free": "Preferred date (pick any date)",
     "label_date_locked": "Event date (confirmed)",
@@ -525,6 +551,19 @@ const TRANSLATIONS = {
     "optgroup_he": "Méthode Yomiuri Ruiz (Cours Individuels)",
     "optgroup_she": "Méthode Ludivine Gomez (Cours Individuels)",
     "optgroup_events": "🎉 Prochains Événements & Ateliers (Dates Spécifiques)",
+    "opt_salsa_yomiuri": "Salsa Cubaine & Casino (avec Yomiuri Ruiz)",
+    "opt_rumba_yomiuri": "Rumba Traditionnelle Afro-cubaine (avec Yomiuri Ruiz)",
+    "opt_bachata_yomiuri": "Bachata & Guidage Rythmique (avec Yomiuri Ruiz)",
+    "opt_fitness_yomiuri": "Coaching Sportif & Condition Physique (avec Yomiuri Ruiz)",
+    "opt_ladystyle_ludivine": "Salsa Cubaine & Lady Style (avec Ludivine Gomez)",
+    "opt_bailoterapia_ludivine": "Bailothérapie · Santé & Bien-être (avec Ludivine Gomez)",
+    "opt_bachata_ludivine": "Bachata Sensuelle & Fluidité Corporelle (avec Ludivine Gomez)",
+    "opt_estiramiento_ludivine": "Alignement Postural & Étirements (avec Ludivine Gomez)",
+    "opt_event_luxembourg": "Luxembourg Latin Dance Festival (23 – 25 Oct 2026)",
+    "opt_event_fiesta": "Soirée Cubaine & Atelier Casino (Sam 21 Nov 2026 · 20h00)",
+    "opt_event_ladystyle": "Workshop Salsa Fusion & Lady Styling (Sam 28 Nov 2026 · 16h30)",
+    "opt_event_bailoterapia": "Journée 'Danse Vibes' : Bailothérapie (Sam 05 Déc 2026 · 11h00)",
+    "opt_event_bachata": "Atelier Bachata Sensuelle & Soirée Sociale (Sam 12 Déc 2026 · 19h30)",
     "label_date": "Date du cours / événement",
     "label_date_free": "Date souhaitée (choisissez n'importe quelle date)",
     "label_date_locked": "Date de l'événement (confirmée)",
@@ -614,8 +653,8 @@ function applyLanguage(lang) {
   currentLang = lang;
   localStorage.setItem("ecosystem_lang", lang);
 
-  // 1. Textos data-i18n
-  document.querySelectorAll("[data-i18n]").forEach(el => {
+  // 1. Textos data-i18n (excluyendo optgroup y option para no destruir el árbol de opciones del select)
+  document.querySelectorAll("[data-i18n]:not(optgroup):not(option)").forEach(el => {
     const key = el.getAttribute("data-i18n");
     if (TRANSLATIONS[lang] && TRANSLATIONS[lang][key] !== undefined) {
       el.innerHTML = TRANSLATIONS[lang][key];
