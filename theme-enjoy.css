@@ -1,8 +1,11 @@
 /* ==========================================================================
    SISTEMA DE PALETAS OFICIALES - ENJOY & LEARN
-   1. Asfalto & Pasión: #121212 | #C62828 | #D4AF37 | #F5F5F5
-   2. Caribe:           #F4F1EA | #E65100 | #2E7D32 | #2C3E50
-   3. Urbano (Activo):  #0B132B | #FF007F | #00E5FF | #E0E1DD
+   1. Urbano (Activo):            #0B132B | #FF007F | #00E5FF | #E0E1DD
+   2. Caribe:                     #F4F1EA | #E65100 | #2E7D32 | #2C3E50
+   3. Asfalto & Pasión:           #121212 | #C62828 | #D4AF37 | #F5F5F5
+   4. Etalonaje Cinematográfico:  #1A1C23 | #D97742 | #2F5C6A | #F2F2F2
+   5. Vanguardia y Microcemento:  #E4E3E0 | #9E2A2B | #4A4A4A | #1C1C1C
+   6. Sprezzatura:                #F9F6F0 | #C4A47C | #5B7065 | #2C3539
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -119,4 +122,119 @@ body.palette-asfalto {
   --bridge-gradient: linear-gradient(135deg, #C62828 0%, #D4AF37 100%);
   --texture-overlay: radial-gradient(circle at 80% 20%, rgba(198, 40, 40, 0.10) 0%, transparent 60%),
                      radial-gradient(circle at 10% 80%, rgba(212, 175, 55, 0.06) 0%, transparent 50%);
+}
+
+/* --------------------------------------------------------------------------
+   PALETA 4: "CINEMATOGRÁFICO" (Etalonaje Cinematográfico - Teal & Orange Oscuro)
+   Fondo principal: Pizarra Abisal (#1A1C23)
+   Texto principal: Blanco Roto (#F2F2F2)
+   Acción primaria (Botones): Naranja Tabaco (#D97742)
+   Acentos: Teal Apagado (#2F5C6A)
+   -------------------------------------------------------------------------- */
+:root[data-palette="cinematografico"],
+body.palette-cinematografico {
+  --bg-primary: #1A1C23;
+  --bg-surface: #222530;
+  --bg-surface-elevated: #2C303E;
+  --bg-glass: rgba(26, 28, 35, 0.92);
+  
+  --text-primary: #F2F2F2;
+  --text-muted: #A6ACB8;
+  --text-dim: #6E7686;
+  
+  --accent-cta: #D97742;
+  --accent-cta-hover: #BF6230;
+  
+  --accent-secondary: #2F5C6A;
+  --accent-secondary-glow: rgba(47, 92, 106, 0.35);
+  
+  --border-subtle: rgba(242, 242, 242, 0.12);
+  --border-focus: rgba(47, 92, 106, 0.60);
+  
+  --shadow-elevation: 0 10px 30px -10px rgba(0, 0, 0, 0.85);
+  --shadow-glow: 0 0 25px rgba(217, 119, 66, 0.40);
+  --bridge-gradient: linear-gradient(135deg, #D97742 0%, #2F5C6A 100%);
+  --texture-overlay: radial-gradient(circle at 80% 20%, rgba(217, 119, 66, 0.12) 0%, transparent 60%),
+                     radial-gradient(circle at 10% 80%, rgba(47, 92, 106, 0.14) 0%, transparent 50%);
+}
+
+/* --------------------------------------------------------------------------
+   PALETA 5: "VANGUARDIA & MICROCEMENTO" (Minimalista y Cruda)
+   Fondo principal: Gris Lienzo (#E4E3E0)
+   Texto principal: Negro Carbón (#1C1C1C)
+   Acción primaria (Botones): Rojo Expresionista (#9E2A2B)
+   Acentos: Asfalto (#4A4A4A)
+   -------------------------------------------------------------------------- */
+:root[data-palette="vanguardia"],
+body.palette-vanguardia {
+  --bg-primary: #E4E3E0;
+  --bg-surface: #ECEBE8;
+  --bg-surface-elevated: #F6F5F2;
+  --bg-glass: rgba(228, 227, 224, 0.94);
+  
+  --text-primary: #1C1C1C;
+  --text-muted: #4A4A4A;
+  --text-dim: #757575;
+  
+  --accent-cta: #9E2A2B;
+  --accent-cta-hover: #821F20;
+  
+  --accent-secondary: #4A4A4A;
+  --accent-secondary-glow: rgba(74, 74, 74, 0.20);
+  
+  --border-subtle: rgba(28, 28, 28, 0.14);
+  --border-focus: rgba(158, 42, 43, 0.55);
+  
+  --shadow-elevation: 0 10px 30px -10px rgba(28, 28, 28, 0.12);
+  --shadow-glow: 0 4px 20px rgba(158, 42, 43, 0.28);
+  --bridge-gradient: linear-gradient(135deg, #9E2A2B 0%, #4A4A4A 100%);
+  --texture-overlay: radial-gradient(circle at 85% 15%, rgba(158, 42, 43, 0.05) 0%, transparent 60%),
+                     radial-gradient(circle at 15% 85%, rgba(74, 74, 74, 0.05) 0%, transparent 50%);
+}
+
+/* --------------------------------------------------------------------------
+   PALETA 6: "SPREZZATURA" (Elegancia Desestructurada)
+   Fondo principal: Lino Crudo (#F9F6F0)
+   Texto principal: Plomo Oscuro (#2C3539)
+   Acción primaria (Botones): Oro Antiguo (#C4A47C)
+   Acentos: Verde Olivo (#5B7065)
+   -------------------------------------------------------------------------- */
+:root[data-palette="sprezzatura"],
+body.palette-sprezzatura {
+  --bg-primary: #F9F6F0;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-glass: rgba(249, 246, 240, 0.94);
+  
+  --text-primary: #2C3539;
+  --text-muted: #5B7065;
+  --text-dim: #7B8A83;
+  
+  --accent-cta: #C4A47C;
+  --accent-cta-hover: #B08F65;
+  
+  --accent-secondary: #5B7065;
+  --accent-secondary-glow: rgba(91, 112, 101, 0.25);
+  
+  --border-subtle: rgba(44, 53, 57, 0.14);
+  --border-focus: rgba(91, 112, 101, 0.50);
+  
+  --shadow-elevation: 0 10px 30px -10px rgba(44, 53, 57, 0.10);
+  --shadow-glow: 0 4px 20px rgba(196, 164, 124, 0.35);
+  --bridge-gradient: linear-gradient(135deg, #C4A47C 0%, #5B7065 100%);
+  --texture-overlay: radial-gradient(circle at 85% 15%, rgba(196, 164, 124, 0.06) 0%, transparent 60%),
+                     radial-gradient(circle at 15% 85%, rgba(91, 112, 101, 0.05) 0%, transparent 50%);
+}
+
+/* Contraste y legibilidad de textos sobre botones Oro Antiguo en Sprezzatura */
+body.palette-sprezzatura .btn-primary,
+body.palette-sprezzatura .nav-cta-reserva,
+body.palette-sprezzatura .btn-submit-reserva,
+body.palette-sprezzatura .btn-reserva-express,
+body.palette-sprezzatura .palette-btn.active,
+:root[data-palette="sprezzatura"] .btn-primary,
+:root[data-palette="sprezzatura"] .nav-cta-reserva,
+:root[data-palette="sprezzatura"] .btn-submit-reserva,
+:root[data-palette="sprezzatura"] .palette-btn.active {
+  color: #1A2124 !important;
 }

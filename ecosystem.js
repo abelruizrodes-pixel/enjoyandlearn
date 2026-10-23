@@ -1534,7 +1534,7 @@ function initBridgeTransitions() {
 }
 
 // ==========================================================================
-// 10. COMPARADOR DE PALETAS DE COLOR (Urbano, Caribe, Asfalto)
+// 10. COMPARADOR DE PALETAS DE COLOR (6 Paletas Oficiales)
 // ==========================================================================
 function initPaletteSwitcher() {
   const urlParams = new URLSearchParams(window.location.search);

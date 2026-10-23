@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """
 Servidor Multi-Puerto de Comparación de Paletas - Enjoy & Learn
-- Puerto 8081: Paleta 1 - "Asfalto & Pasión" (Negro Asfalto #121212)
+- Puerto 8081: Paleta 1 - "Urbano" (Azul Medianoche #0B132B)
 - Puerto 8082: Paleta 2 - "Caribe" (Blanco Arena #F4F1EA)
-- Puerto 8083: Paleta 3 - "Urbano" (Azul Medianoche #0B132B)
+- Puerto 8083: Paleta 3 - "Asfalto & Pasión" (Negro Asfalto #121212)
+- Puerto 8084: Paleta 4 - "Etalonaje Cinematográfico" (Pizarra Abisal #1A1C23)
+- Puerto 8085: Paleta 5 - "Vanguardia & Microcemento" (Gris Lienzo #E4E3E0)
+- Puerto 8086: Paleta 6 - "Sprezzatura" (Lino Crudo #F9F6F0)
 """
 
 import http.server
@@ -65,9 +68,12 @@ def run_server(port, palette):
 
 if __name__ == "__main__":
     servers = [
-        (8081, "asfalto"),
+        (8081, "urbano"),
         (8082, "caribe"),
-        (8083, "urbano")
+        (8083, "asfalto"),
+        (8084, "cinematografico"),
+        (8085, "vanguardia"),
+        (8086, "sprezzatura")
     ]
     
     threads = []

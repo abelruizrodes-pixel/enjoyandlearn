@@ -1617,11 +1617,13 @@ img, video {
     border: 1.5px solid var(--border-focus);
     border-radius: 16px;
     padding: 0.85rem;
-    gap: 0.55rem;
+    gap: 0.5rem;
     box-shadow: 0 14px 40px rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    min-width: 185px;
+    min-width: 195px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
     z-index: 160;
   }
 
@@ -2798,12 +2800,13 @@ img, video {
   align-items: center;
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-focus);
-  padding: 0.4rem 0.6rem;
+  padding: 0.35rem 0.6rem;
   border-radius: var(--pill-radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 95vw;
 }
 
 .palette-comparator-widget:hover {
@@ -2814,27 +2817,29 @@ img, video {
 .comparator-pill {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .comparator-title {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-primary);
-  padding: 0 0.5rem;
+  padding: 0 0.4rem;
   white-space: nowrap;
 }
 
 .palette-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
+  gap: 0.4rem;
+  padding: 0.38rem 0.65rem;
   border-radius: var(--pill-radius);
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
